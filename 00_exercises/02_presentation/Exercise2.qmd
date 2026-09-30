@@ -1,0 +1,145 @@
+---
+title: "Seatbelts save lives"
+author: 
+  - name: Job Odijk
+    email: j.j.odijk@uu.nl
+date: 29 Sep 2026
+date-format: "D MMM YYYY"
+bibliography: markup.bib
+execute: 
+  echo: true
+editor: source
+format: 
+  revealjs:
+    embed-resources: true
+    theme: [simple]
+    progress: true
+    transition: fade
+    slide-number: true
+    margin: 0.075
+    logo: "SeatbeltLogo.jpg"
+    toc: false
+    toc-depth: 1
+    toc-title: Outline
+    scrollable: true
+    reference-location: margin
+    footer: "Job Odijk"
+---
+
+
+## What makes driving dangerous?
+
+::: columns 
+::: {.column width = "50%"}
+
+- Drivers get distracted (phone, radio, passengers)
+- Driving too fast
+- Drunk driving
+- Sleep deprivation
+
+:::
+
+:::{.column width = "50%"}
+<center>
+![dangerous driving](dangerousDriving.jpeg)
+</center>
+
+:::
+:::
+## The numbers do not lie
+
+
+
+
+Many people die from car accidents each year...
+
+
+```{r}
+#| echo: False
+
+library(astsa)
+data("Seatbelts")
+
+library(dygraphs)
+dygraph(Seatbelts[,1], main = "Number of Drivers Killed per Year", ylab = "Drivers Killed")
+
+```
+
+
+
+
+
+## A Closer Look at the Data
+
+
+```{r}
+library(DT)
+Seatbelts |> 
+  datatable(options = list(pageLength = 20))
+```
+
+
+## Seatbelts
+
+To make driving safer seatbelts were invented.
+
+But people decided not wear them so, 
+
+governments started seatbelt campaigns: 
+
+{{< video https://www.youtube.com/watch?v=QDbkgnaQmag >}}
+
+
+## But do they work?
+
+:::columns
+:::{.column width = "50%"}
+
+<center>
+Code for the simplest test: 
+
+```{r}
+#| eval: False
+
+t.test(DriversKilled ~ law, data = Seatbelts)
+```
+
+</center>
+:::
+:::{.column width = "50%"}
+<center>
+Test results: 
+
+```{r}
+#| output: asis
+#| cache: True
+#| code-line-numbers: True
+#| code-fold: True
+t.test(DriversKilled ~ law, data = Seatbelts)
+```
+
+</center>
+
+:::
+:::
+
+## Renv 
+
+```{r}
+library(renv)
+
+renv::init()
+
+sessionInfo()
+```
+Created on 30-09-2026 with the renv package @ushey_renv_2019
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,83 @@
+---
+title: "My Reproducable Manuscript"
+format: 
+    pdf: default 
+bibliography: references.bib
+csl: chicago-author-date-classic.csl
+execute:
+    echo: False
+---
+
+```{r}
+#| echo: False
+
+# Load penguins
+library(ggplot2)
+library(tinytex)
+```
+
+# Meet Quarto
+
+Quarto enables you to weave together content and executable code into a finished document. 
+To learn more about Quarto see <https://quarto.org.>
+
+# Meet the penguins
+
+The `penguins` data from the [palmerpenguins](https://allisonhorst.github.io/palmerpenguins/) package contains size measurements for 
+344 penguins from three species observed on three islands in the Palmer Archipelago, Antarctica [@m.horstPalmerArchipelagoPenguins2022], [@boulesteixIntroductionStatisticalSimulations2020]. 
+
+![](https://allisonhorst.github.io/palmerpenguins/reference/figures/lter_penguins.png)
+
+\newpage
+
+# Results
+
+```{r}
+#| echo: False
+
+# Read data
+penguins <- read.csv("../data/data.csv")
+
+```
+
+A simple calculation with inline code such as `25 + 25` = `r 25+25`. In the sample there are `r table(penguins$Species)[3]` Gentoo penguins and `r table(penguins$Species)[2]` Chinstrap penguins. Another simple calculation is $e^{log(1)} =$ `r exp(log(1))`.
+
+```{r}
+#| fig-width: 8
+#| fig-height: 6
+#| echo : False
+#| warning : False
+#| message : False
+
+
+
+# Plot penguins
+ggplot(penguins, 
+       aes(x = `Flipper.Length..mm.`, y = `Culmen.Length..mm.`)) +
+        geom_point(aes(color = Species, shape = Species)) +
+        scale_color_manual(values = c("darkorange","purple","cyan4")) +
+        labs(
+                title = "Flipper and Culmen length",
+                subtitle = "Dimensions for penguins at Palmer Station LTER",
+                x = "Flipper length (mm)", y = "Culmen length (mm)",
+                color = "Penguin species", shape = "Penguin species"
+        ) +
+        theme_minimal()
+```
+
+## Do addition
+
+```{r}
+#| file: "../scripts/do_addition.R"
+#| eval : True
+
+do_addition(1, 1)
+```
+
+
+\newpage
+
+# References
+
+::: {#refs}
+:::
